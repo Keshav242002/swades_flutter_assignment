@@ -1,0 +1,38 @@
+# ─── Python / Django ───────────────────────────────────────────────────────────
+backend_code/venv/
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+backend_code/server/staticfiles/
+backend_code/server/db.sqlite3
+*.sqlite3
+
+# ─── Secrets & credentials ─────────────────────────────────────────────────────
+# Firebase service-account key — never commit; use FIREBASE_CREDENTIALS_JSON env var
+backend_code/swades-hackathon-*.json
+backend_code/server/.env
+
+# ─── macOS ─────────────────────────────────────────────────────────────────────
+.DS_Store
+
+# ─── IDE ───────────────────────────────────────────────────────────────────────
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# ─── Internal planning / notes (not part of deliverable) ───────────────────────
+plans/
+backend_code/plans/
+rules.md
+backend_code/rules.md
+
+# ─── Flutter build artefacts (flutter_app/.gitignore covers most, belt+braces) ─
+flutter_app/build/
+flutter_app/.dart_tool/
+flutter_app/.flutter-plugins
+flutter_app/.flutter-plugins-dependencies
+flutter_app/.metadata
+# Default Flutter README — real README is at repo root
+flutter_app/README.md
