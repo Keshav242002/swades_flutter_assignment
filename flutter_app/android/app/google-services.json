@@ -12,7 +12,20 @@
           "package_name": "com.quickslot.quickslot"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "566889660924-1fo895krs7oihneaf31dp5j02pfiui3m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.quickslot.quickslot",
+            "certificate_hash": "622519ea7b2b2f277bc2ddaef81c1c498c93cea2"
+          }
+        },
+        {
+          "client_id": "566889660924-t0c0mq7prjk5tqbpus81mfiunok82iua.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCxzjADR_pFG58VCiQvXqfAt_MuawaLo30"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "566889660924-t0c0mq7prjk5tqbpus81mfiunok82iua.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "566889660924-puadm4vt041t5mbcd0imd282gpm55e6d.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.quickslot.quickslot"
+              }
+            }
+          ]
         }
       }
     }

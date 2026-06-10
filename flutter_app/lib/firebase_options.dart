@@ -45,6 +45,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '566889660924',
     projectId: 'swades-hackathon-aa7eb',
     storageBucket: 'swades-hackathon-aa7eb.firebasestorage.app',
+    androidClientId: '566889660924-1fo895krs7oihneaf31dp5j02pfiui3m.apps.googleusercontent.com',
+    iosClientId: '566889660924-puadm4vt041t5mbcd0imd282gpm55e6d.apps.googleusercontent.com',
     iosBundleId: 'com.quickslot.quickslot',
   );
 }
