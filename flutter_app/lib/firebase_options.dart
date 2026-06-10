@@ -33,20 +33,18 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'REPLACE_ME',
-    appId: 'REPLACE_ME',
-    messagingSenderId: 'REPLACE_ME',
-    projectId: 'REPLACE_ME',
-    storageBucket: 'REPLACE_ME',
+    apiKey: 'AIzaSyCxzjADR_pFG58VCiQvXqfAt_MuawaLo30',
+    appId: '1:566889660924:android:ccbfd440c75b709aae3279',
+    messagingSenderId: '566889660924',
+    projectId: 'swades-hackathon-aa7eb',
+    storageBucket: 'swades-hackathon-aa7eb.firebasestorage.app',
   );
-
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'REPLACE_ME',
-    appId: 'REPLACE_ME',
-    messagingSenderId: 'REPLACE_ME',
-    projectId: 'REPLACE_ME',
-    storageBucket: 'REPLACE_ME',
-    iosClientId: 'REPLACE_ME',
+    apiKey: 'AIzaSyAHP4xeemffBspgIbUetZWvL2hg-fnSZoI',
+    appId: '1:566889660924:ios:cc9b9ad1cabda616ae3279',
+    messagingSenderId: '566889660924',
+    projectId: 'swades-hackathon-aa7eb',
+    storageBucket: 'swades-hackathon-aa7eb.firebasestorage.app',
     iosBundleId: 'com.quickslot.quickslot',
   );
 }

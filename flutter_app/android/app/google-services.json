@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "566889660924",
+    "project_id": "swades-hackathon-aa7eb",
+    "storage_bucket": "swades-hackathon-aa7eb.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:566889660924:android:ccbfd440c75b709aae3279",
+        "android_client_info": {
+          "package_name": "com.quickslot.quickslot"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxzjADR_pFG58VCiQvXqfAt_MuawaLo30"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
