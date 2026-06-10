@@ -16,6 +16,7 @@ class SlotBloc extends Bloc<SlotEvent, SlotState> {
   Timer? _pollingTimer;
   int? _currentVenueId;
   String? _currentDate;
+  DateTime? _lastSyncTime;
 
   SlotBloc(this._venueRepository, this._bookingRepository)
       : super(const SlotInitial()) {
@@ -32,6 +33,7 @@ class SlotBloc extends Bloc<SlotEvent, SlotState> {
     emit(const SlotLoading());
     try {
       final slots = await _venueRepository.getSlots(event.venueId, event.date);
+      _lastSyncTime = DateTime.now().toUtc();
       if (slots.isEmpty) {
         emit(const SlotEmpty());
       } else {
@@ -81,15 +83,32 @@ class SlotBloc extends Bloc<SlotEvent, SlotState> {
   }
 
   Future<void> _onPollingTick(SlotPollingTick event, Emitter<SlotState> emit) async {
-    // Silent refresh — don't show loading indicator
+    if (state is! SlotLoaded) return;
+    final since = _lastSyncTime;
+    if (since == null) return;
     try {
-      final slots = await _venueRepository.getSlots(event.venueId, event.date);
-      if (state is SlotLoaded) {
-        final current = state as SlotLoaded;
-        emit(current.copyWith(slots: slots));
-      } else if (slots.isNotEmpty) {
-        emit(SlotLoaded(slots: slots));
+      final changed = await _venueRepository.getSlotsDelta(
+          event.venueId, event.date, since);
+      _lastSyncTime = DateTime.now().toUtc();
+      if (changed.isEmpty) return;
+
+      final current = state as SlotLoaded;
+      final updatedMap = {for (final s in current.slots) s.id: s};
+      for (final s in changed) {
+        updatedMap[s.id] = s;
       }
+      final merged = updatedMap.values.toList()
+        ..sort((a, b) => a.startTime.compareTo(b.startTime));
+
+      // Deselect if the selected slot was just booked by someone else
+      final selectedId = current.selectedSlotId;
+      final stillAvailable = selectedId != null &&
+          (updatedMap[selectedId]?.isBooked ?? false) == false;
+      emit(current.copyWith(
+        slots: merged,
+        selectedSlotId: stillAvailable ? selectedId : null,
+        clearSelected: !stillAvailable,
+      ));
     } catch (_) {
       // Silently ignore polling errors
     }

@@ -11,4 +11,8 @@ class VenueRepository {
 
   Future<List<SlotModel>> getSlots(int venueId, String date) =>
       _remoteDataSource.getSlots(venueId, date);
+
+  Future<List<SlotModel>> getSlotsDelta(
+          int venueId, String date, DateTime since) =>
+      _remoteDataSource.getSlotsDelta(venueId, date, since);
 }
