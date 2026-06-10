@@ -23,11 +23,21 @@ class VenueModel extends Equatable {
         id: json['id'],
         name: json['name'],
         sportType: json['sport_type'],
-        location: json['location'],
+        location: json['location'] ?? '',
         description: json['description'] ?? '',
         imageUrl: json['image_url'] ?? '',
-        pricePerHour: (json['price_per_hour'] as num).toDouble(),
+        pricePerHour: double.tryParse(json['price_per_hour']?.toString() ?? '') ?? 0,
       );
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'name': name,
+        'sport_type': sportType,
+        'location': location,
+        'description': description,
+        'image_url': imageUrl,
+        'price_per_hour': pricePerHour.toString(),
+      };
 
   String get sportEmoji {
     switch (sportType.toLowerCase()) {

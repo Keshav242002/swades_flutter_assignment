@@ -56,8 +56,29 @@ class _MyBookingsScreenState extends State<MyBookingsScreen> {
           };
 
           final cancellingId = state is BookingCancelling ? state.cancellingId : null;
+          final isFromCache = state is BookingLoaded && state.fromCache;
 
-          return RefreshIndicator(
+          return Column(
+            children: [
+              if (isFromCache)
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                  color: AppTheme.accentGreen.withAlpha(30),
+                  child: Row(children: [
+                    const Icon(Icons.offline_bolt_rounded,
+                        size: 16, color: AppTheme.accentGreen),
+                    const SizedBox(width: 8),
+                    Text(
+                      'Showing cached data — pull to refresh',
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            color: AppTheme.accentGreen,
+                          ),
+                    ),
+                  ]),
+                ),
+              Expanded(
+                child: RefreshIndicator(
             color: AppTheme.accentGreen,
             backgroundColor: AppTheme.surfaceColor,
             onRefresh: () async {
@@ -90,6 +111,9 @@ class _MyBookingsScreenState extends State<MyBookingsScreen> {
                 },
               ),
             ),
+                ),
+              ),
+            ],
           );
         },
       ),

@@ -27,6 +27,15 @@ class SlotModel extends Equatable {
         isBooked: json['is_booked'] ?? false,
       );
 
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'venue_id': venueId,
+        'date': date,
+        'start_time': startTime,
+        'end_time': endTime,
+        'is_booked': isBooked,
+      };
+
   int get startHour => int.parse(startTime.split(':')[0]);
 
   String get displayStartTime => AppDateUtils.formatTime(startTime);

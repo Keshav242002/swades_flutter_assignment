@@ -22,6 +22,13 @@ class BookingModel extends Equatable {
         bookedAt: DateTime.parse(json['booked_at']),
       );
 
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'slot': slot.toJson(),
+        'venue': venue.toJson(),
+        'booked_at': bookedAt.toIso8601String(),
+      };
+
   @override
   List<Object?> get props => [id, slot, venue, bookedAt];
 }

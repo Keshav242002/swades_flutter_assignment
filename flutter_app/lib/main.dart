@@ -5,7 +5,12 @@ import 'core/theme/app_theme.dart';
 import 'firebase_options.dart';
 import 'core/network/api_client.dart';
 import 'data/datasources/auth_remote_datasource.dart';
+import 'data/datasources/venue_remote_datasource.dart';
+import 'data/datasources/booking_remote_datasource.dart';
+import 'data/datasources/booking_local_datasource.dart';
 import 'data/repositories/auth_repository.dart';
+import 'data/repositories/venue_repository.dart';
+import 'data/repositories/booking_repository.dart';
 import 'presentation/blocs/auth/auth_bloc.dart';
 import 'presentation/screens/login_screen.dart';
 import 'presentation/screens/home_screen.dart';
@@ -29,6 +34,15 @@ class QuickSlotApp extends StatelessWidget {
         RepositoryProvider(
           create: (_) => AuthRepository(AuthRemoteDataSource(apiClient)),
         ),
+        RepositoryProvider(
+          create: (_) => VenueRepository(VenueRemoteDataSource(apiClient)),
+        ),
+        RepositoryProvider(
+          create: (_) => BookingRepository(
+            BookingRemoteDataSource(apiClient),
+            BookingLocalDataSource(),
+          ),
+        ),
       ],
       child: BlocProvider(
         create: (ctx) => AuthBloc(ctx.read<AuthRepository>())
@@ -50,11 +64,18 @@ class _AuthGate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AuthBloc, AuthState>(
+      // Only rebuild for top-level navigation transitions.
+      // Keeping AuthLoading and AuthError out of buildWhen means LoginScreen
+      // stays mounted during a login attempt, so its BlocListener receives
+      // the AuthError state transition and can show the error SnackBar.
+      buildWhen: (_, current) =>
+          current is AuthInitial ||
+          current is AuthAuthenticated ||
+          current is AuthUnauthenticated,
       builder: (context, state) {
         if (state is AuthAuthenticated) return const HomeScreen();
-        if (state is AuthUnauthenticated || state is AuthError) {
-          return const LoginScreen();
-        }
+        if (state is AuthUnauthenticated) return const LoginScreen();
+        // AuthInitial — show splash while checking persisted session
         return const Scaffold(
           body: Center(
             child: Column(

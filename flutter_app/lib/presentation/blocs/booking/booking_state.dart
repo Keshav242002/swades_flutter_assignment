@@ -16,9 +16,10 @@ class BookingLoading extends BookingState {
 
 class BookingLoaded extends BookingState {
   final List<BookingModel> bookings;
-  const BookingLoaded({required this.bookings});
+  final bool fromCache;
+  const BookingLoaded({required this.bookings, this.fromCache = false});
   @override
-  List<Object?> get props => [bookings];
+  List<Object?> get props => [bookings, fromCache];
 }
 
 class BookingCancelling extends BookingState {

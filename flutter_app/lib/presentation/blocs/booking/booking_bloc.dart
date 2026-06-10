@@ -17,11 +17,11 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
   Future<void> _onFetch(BookingFetchRequested event, Emitter<BookingState> emit) async {
     emit(const BookingLoading());
     try {
-      final bookings = await _bookingRepository.getMyBookings();
-      if (bookings.isEmpty) {
+      final result = await _bookingRepository.getMyBookings();
+      if (result.bookings.isEmpty) {
         emit(const BookingEmpty());
       } else {
-        emit(BookingLoaded(bookings: bookings));
+        emit(BookingLoaded(bookings: result.bookings, fromCache: result.fromCache));
       }
     } catch (e) {
       emit(BookingError(message: e.toString()));
